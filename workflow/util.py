@@ -5,7 +5,8 @@
 #
 # MIT Licence. See http://opensource.org/licenses/MIT
 #
-# Created on 2017-12-17
+# modified on 2022-02-04 by Kyeongwon Lee <kwlee1718@gmail.com>
+#
 #
 
 """A selection of helper functions useful for building workflows."""
@@ -110,8 +111,8 @@ def unicodify(s, encoding='utf-8', norm=None):
         unicode: Decoded, optionally normalised, Unicode string.
 
     """
-    if not isinstance(s, unicode):
-        s = unicode(s, encoding)
+    if not isinstance(s, str):
+        s = str(s)
 
     if norm:
         from unicodedata import normalize
@@ -138,7 +139,7 @@ def utf8ify(s):
     if isinstance(s, str):
         return s
 
-    if isinstance(s, unicode):
+    if isinstance(s, str):
         return s.encode('utf-8')
 
     return str(s)
