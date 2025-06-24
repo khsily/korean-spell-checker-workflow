@@ -4,6 +4,7 @@ import sys
 from workflow import Workflow, web
 import re
 from urllib.parse import unquote
+from html import unescape
 
 
 def get_passport_key():
@@ -40,8 +41,11 @@ def main(wf):
     def wrapper():
         return get_data(args)
 
-    data = wf.cached_data(args, wrapper, max_age=30)
+    # 캐시 키에서 / 문자를 안전한 문자로 치환 (파일 시스템 에러 방지)
+    cache_key = args.replace("/", "_slash_").replace("\\", "_backslash_")
+    data = wf.cached_data(cache_key, wrapper, max_age=30)
     data = data["message"]["result"]["notag_html"]
+    data = unescape(data).replace("<br>", "\n")
 
     wf.add_item(
         title="Check spelling for '%s'" % args,
