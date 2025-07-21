@@ -1,4 +1,4 @@
-# Korean Spell Checker Workflow for Alfred4
+# Korean Spell Checker Workflow for Alfred5
 
 Alfred에서 네이버 맞춤법 검사기를 사용하여 맞춤법 검사를 할 수 있게 해주는 workflow입니다.
 
